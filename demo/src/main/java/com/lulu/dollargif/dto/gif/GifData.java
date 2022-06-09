@@ -1,12 +1,12 @@
-package com.lulu.dollargif.gifClient.response.gif;
+package com.lulu.dollargif.dto.gif;
 
-import com.lulu.dollargif.gifClient.response.gif.images.Images;
+import com.lulu.dollargif.dto.gif.images.Images;
 
-public class Gif {
+public class GifData {
     private String url;
     private Images images;
 
-    public Gif() {
+    public GifData() {
     }
 
     public String getUrl() {

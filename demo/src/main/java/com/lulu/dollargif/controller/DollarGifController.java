@@ -1,8 +1,8 @@
-package com.lulu.dollargif.dollarGifController;
+package com.lulu.dollargif.controller;
 
-import com.lulu.dollargif.gifClient.GifClient;
+import com.lulu.dollargif.client.GifClient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/usd-gif")
 public class DollarGifController {
+
+    @Value("${giphy.api.key}")
+    private String giphyApiKey;
 
     private GifClient gifClient;
 
@@ -25,7 +28,7 @@ public class DollarGifController {
 
     @GetMapping("/get-gif")
     String getGif() {
-        var resp = gifClient.getGif("SJaGwl4BR45fpnMauxr4OVPBPsnBnTq0", "rich");
+        var resp = gifClient.getGif(giphyApiKey, "rich");
 
         return String.format("""
                 <html>

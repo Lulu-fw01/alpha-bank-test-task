@@ -1,7 +1,7 @@
-package com.lulu.dollargif.gifClient.response.gif.images;
+package com.lulu.dollargif.dto.gif.images;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.lulu.dollargif.gifClient.response.gif.images.image.Image;
+import com.lulu.dollargif.dto.gif.images.image.Image;
 
 public class Images {
     private Image image;

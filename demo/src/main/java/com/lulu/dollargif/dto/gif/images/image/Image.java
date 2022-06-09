@@ -1,4 +1,4 @@
-package com.lulu.dollargif.gifClient.response.gif.images.image;
+package com.lulu.dollargif.dto.gif.images.image;
 
 public class Image {
     private String url;
