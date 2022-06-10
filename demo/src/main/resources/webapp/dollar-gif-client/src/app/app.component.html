@@ -1,27 +1,12 @@
-<div align='center'><h1>Bookstore CRUD with Angular</h1></div>
+<div align='center'><h1>Currency rate Gif!</h1></div>
 
 <div>
-  <table class="table" style="width: 80%">
-    <tr>
-      <th>Title</th>
-      <th>Author</th>
-      <th></th>
-    </tr>
-    <tr *ngFor="let book of books">
-      <td>
-        {{book.title}}
-      </td>
-      <td>
-        {{book.author}}
-      </td>
-    </tr>
-  </table>
+  <label for="base">Currency base:</label>
+  <input type="text" name="base" id="base" #baseCurrency>
 </div>
-<div>
-  <p>
-    <button (click)="addBook()"> Add Book</button>
-  </p>
-</div>
+
+<br/>
+<button type="button" (click)="onGetGifClick(baseCurrency.value)">Get gif</button>
 
 <div>
   <b>yesterday: {{rate.yesterday}}</b>
