@@ -2,7 +2,6 @@ package com.lulu.dollargif.client;
 
 import com.lulu.dollargif.dto.rate.Rate;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,13 +16,13 @@ public interface OxrClient {
      * Get request.
      * */
     @GetMapping("/latest.json")
-    ResponseEntity<Rate> getLatest(@RequestParam("app_id") String appId, @RequestParam("base") String base);
+    Rate getLatest(@RequestParam("app_id") String appId, @RequestParam("base") String base);
 
     /**
      * Get request.
      * */
     @GetMapping("/latest.json")
-    ResponseEntity<Rate> getLatest(@RequestParam("app_id") String appId);
+    Rate getLatest(@RequestParam("app_id") String appId);
 
     /**
      * Get request.
@@ -35,7 +34,7 @@ public interface OxrClient {
      * For more info follow <a href="https://docs.openexchangerates.org/docs/set-base-currency">link</a>.
      * */
     @GetMapping("/historical/{date}.json")
-    ResponseEntity<Rate> getByDate(@PathVariable("date") String date, @RequestParam("app_id") String appId, @RequestParam("base") String base);
+    Rate getByDate(@PathVariable("date") String date, @RequestParam("app_id") String appId, @RequestParam("base") String base);
 
     /**
      * Get request.
@@ -44,5 +43,5 @@ public interface OxrClient {
      * @param appId your app id.
      * */
     @GetMapping("/historical/{date}.json")
-    ResponseEntity<Rate> getByDate(@PathVariable("date") String date, @RequestParam("app_id") String appId);
+    Rate getByDate(@PathVariable("date") String date, @RequestParam("app_id") String appId);
 }
