@@ -5,17 +5,13 @@ import com.lulu.dollargif.client.OxrClient;
 import com.lulu.dollargif.model.GifRate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/currency-gif")
 public class DollarGifController {
 
@@ -61,7 +57,7 @@ public class DollarGifController {
     }
 
     @GetMapping("/gif/{currencyCode}")
-    String getGif(@PathVariable("currencyCode") String currencyCode) {
+    GifRate getGif(@PathVariable("currencyCode") String currencyCode) {
         var todayRatesResp = oxrClient.getLatest(oxrId);
 
         var date = getYesterdayDate();
@@ -72,6 +68,11 @@ public class DollarGifController {
 
         var gif = gifClient.getGif(giphyApiKey, todayRate > yesterdayRate ? "rich" : "broke");
 
-        return getGifHtml(yesterdayRate, todayRate, gif.getData().getImages().getImage().getUrl());
+        var gifRate = new GifRate();
+        gifRate.url = gif.getData().getImages().getImage().getUrl();
+        gifRate.yesterdayRate = yesterdayRate;
+        gifRate.todayRate = todayRate;
+        return gifRate;
+        //return getGifHtml(yesterdayRate, todayRate, gif.getData().getImages().getImage().getUrl());
     }
 }
