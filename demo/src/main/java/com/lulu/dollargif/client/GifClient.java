@@ -7,13 +7,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Feign client of <a href="https://giphy.com/">giphy.com</a>
- * */
+ */
 @FeignClient(name = "giphy-client", url = "${giphy.api.url}")
 public interface GifClient {
 
     /**
-     * Get request.
-     * */
+     * Get request of random gif.
+     *
+     * @param api_key of giphy.com.
+     * @param tag     tag of request. It is something like theme of the gif.
+     *
+     * @return dto {@link Gif}.
+     */
     @GetMapping(value = "/random")
     Gif getGif(@RequestParam("api_key") String api_key, @RequestParam("tag") String tag);
 }
