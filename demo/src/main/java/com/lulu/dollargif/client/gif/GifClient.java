@@ -1,5 +1,6 @@
-package com.lulu.dollargif.client;
+package com.lulu.dollargif.client.gif;
 
+import com.lulu.dollargif.configuration.GifClientConfiguration;
 import com.lulu.dollargif.dto.Gif;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  * Feign client of <a href="https://giphy.com/">giphy.com</a>
  */
-@FeignClient(name = "giphy-client", url = "${giphy.api.url}")
+@FeignClient(name = "giphy-client", url = "${giphy.api.url}", configuration = GifClientConfiguration.class)
 public interface GifClient {
 
     /**

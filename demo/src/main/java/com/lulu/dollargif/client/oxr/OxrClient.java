@@ -1,5 +1,6 @@
-package com.lulu.dollargif.client;
+package com.lulu.dollargif.client.oxr;
 
+import com.lulu.dollargif.configuration.OxrClientConfiguration;
 import com.lulu.dollargif.dto.rate.Rate;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  * Feign client of <a href="https://docs.openexchangerates.org/">docs.openexchangerates.org</a>
  */
-@FeignClient(name = "oxr-client", url = "${oxr.api.url}")
+@FeignClient(name = "oxr-client", url = "${oxr.api.url}", configuration = OxrClientConfiguration.class)
 public interface OxrClient {
 
     /**
