@@ -45,6 +45,7 @@ public class DollarGifController {
         return "Hello world!";
     }
 
+    @Deprecated
     private static String getGifHtml(Double yesterdayRate, Double todayRate, String gifUrl) {
         return String.format("""
                 <html>
@@ -73,6 +74,5 @@ public class DollarGifController {
         gifRate.yesterdayRate = yesterdayRate;
         gifRate.todayRate = todayRate;
         return gifRate;
-        //return getGifHtml(yesterdayRate, todayRate, gif.getData().getImages().getImage().getUrl());
     }
 }

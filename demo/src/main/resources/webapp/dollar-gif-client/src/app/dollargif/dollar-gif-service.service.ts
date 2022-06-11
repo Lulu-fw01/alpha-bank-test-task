@@ -13,6 +13,7 @@ export class DollarGifService {
   }
 
   getRate(base: string): Observable<any> {
+    console.log("Making getRate request.");
     return this.http.get(`${this.url}/gif/${base}`);
   }
 }

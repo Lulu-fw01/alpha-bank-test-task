@@ -11,12 +11,14 @@ import {Router} from "@angular/router";
 export class AppComponent implements OnInit {
   title = 'dollar-gif-client';
   rate?: Rate;
+  console = console;
 
   constructor(private router: Router, private dollarGifService: DollarGifService) {
   }
 
   getRate(base: string) {
     this.dollarGifService.getRate(base).subscribe(data => {
+      console.log(data);
       this.rate = data;
     });
   }
@@ -28,6 +30,7 @@ export class AppComponent implements OnInit {
   }
 
   onGetGifClick(base: string) {
+    console.log("Get gif button was clicked.");
     this.getRate(base);
   }
 }

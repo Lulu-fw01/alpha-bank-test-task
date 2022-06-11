@@ -1,5 +1,5 @@
 export class Rate {
-  yesterday?: number;
-  today?: number;
+  yesterdayRate?: number;
+  todayRate?: number;
   url?: string;
 }
