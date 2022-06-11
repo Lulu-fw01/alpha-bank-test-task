@@ -7,7 +7,7 @@ import {Observable} from 'rxjs';
 })
 export class DollarGifService {
 
-  private url = 'http://localhost:8080/currency-gif/';
+  private url = 'http://localhost:8080/currency-gif';
 
   constructor(private http: HttpClient) {
   }
@@ -15,13 +15,4 @@ export class DollarGifService {
   getRate(base: string): Observable<any> {
     return this.http.get(`${this.url}/gif/${base}`);
   }
-
-  /*
-  addBook(book: Object): Observable<Object> {
-    return this.http.post(`${this.url}`, book);
-  }
-
-  deleteBook(id: number): Observable<any> {
-    return this.http.delete(`${this.url}/${id}`, {responseType: 'text'});
-  }*/
 }

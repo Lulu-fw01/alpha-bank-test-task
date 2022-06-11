@@ -10,7 +10,7 @@ import {Router} from "@angular/router";
 })
 export class AppComponent implements OnInit {
   title = 'dollar-gif-client';
-  rate: Rate | undefined;
+  rate?: Rate;
 
   constructor(private router: Router, private dollarGifService: DollarGifService) {
   }

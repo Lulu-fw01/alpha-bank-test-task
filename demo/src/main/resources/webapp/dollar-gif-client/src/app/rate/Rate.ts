@@ -1,5 +1,5 @@
 export class Rate {
-  yesterday: number | undefined;
-  today: number | undefined;
-  url: string | undefined;
+  yesterday?: number;
+  today?: number;
+  url?: string;
 }
