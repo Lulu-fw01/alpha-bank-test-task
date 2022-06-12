@@ -1,0 +1,27 @@
+<div class="content" role="main">
+  <div>
+    <label for="base">Currency base:  </label>
+    <input type="text" name="base" id="base" #baseCurrency>
+    <label>{{errorMessage}}</label>
+  </div>
+  <p>
+    <br/>
+    <button type="button" (click)="onGetGifClick(baseCurrency.value)">Get gif</button>
+  </p>
+  <br/>
+  <div>
+    <b>yesterday rate: {{rate?.yesterdayRate}}</b>
+  </div>
+  <br/>
+  <div>
+    <b>today rate: {{rate?.todayRate}}</b>
+  </div>
+  <br/>
+  <div>
+    <img src="{{rate?.url}}" width="250"/>
+  </div>
+
+</div>
+
+
+<router-outlet></router-outlet>
