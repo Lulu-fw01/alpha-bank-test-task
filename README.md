@@ -9,6 +9,6 @@ cd <path-to-repository>/demo
 
 ### Client
 ```bash
-cd <path-to-repository>/demo/src/main/resources/webapp/dollar-gif-client
+cd <path-to-repository>/dollar-gif-client
 ng serve
 ```

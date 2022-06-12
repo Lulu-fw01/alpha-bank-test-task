@@ -1,6 +1,6 @@
 package com.lulu.dollargif.client.oxr;
 
-import com.lulu.dollargif.exception.OxrClientException;
+import com.lulu.dollargif.exception.ClientException;
 import feign.Response;
 import feign.codec.ErrorDecoder;
 
@@ -10,22 +10,22 @@ public class OxrClientErrorDecoder implements ErrorDecoder {
         var reason = response.reason();
         switch (response.status()) {
             case 400 -> {
-                return new OxrClientException("Unsupported base currency.", 400);
+                return new ClientException("Unsupported base currency.", 400);
             }
             case 401 -> {
-                return new OxrClientException("Server error, problems with app_id.", 401);
+                return new ClientException("Server error, problems with app_id.", 401);
             }
             case 403 -> {
-                return new OxrClientException("Too much requests.", 403);
+                return new ClientException("Too much requests.", 403);
             }
             case 404 -> {
-                return new OxrClientException("Resource no found.", 404);
+                return new ClientException("Resource no found.", 404);
             }
             case 429 -> {
-                return new OxrClientException("No permission.", 429);
+                return new ClientException("No permission.", 429);
             }
             default -> {
-                return new Exception("Common Feign Exception");
+                return new ClientException("Common Feign Exception");
             }
         }
     }

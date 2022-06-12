@@ -2,6 +2,9 @@ package com.lulu.dollargif.controller;
 
 import com.lulu.dollargif.client.gif.GifClient;
 import com.lulu.dollargif.client.oxr.OxrClient;
+import com.lulu.dollargif.dto.Gif;
+import com.lulu.dollargif.dto.rate.Rate;
+import com.lulu.dollargif.exception.ClientException;
 import com.lulu.dollargif.model.GifRate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -44,18 +47,33 @@ public class DollarGifController {
 
     @GetMapping("/gif/{currencyCode}")
     public ResponseEntity<?> getGif(@PathVariable("currencyCode") String currencyCode) {
-        var todayRatesResp = oxrClient.getLatest(oxrId);
+        Rate todayRatesResp;
+        try {
+            todayRatesResp = oxrClient.getLatest(oxrId);
+        } catch (ClientException e) {
+            return ResponseEntity.status(e.getErrorCode()).body("Oxr feign client error.");
+        }
 
         var date = getYesterdayDate();
-        var yesterdayRatesResp = oxrClient.getByDate(date, oxrId);
+        Rate yesterdayRatesResp;
+        try {
+            yesterdayRatesResp = oxrClient.getByDate(date, oxrId);
+        } catch (ClientException e) {
+            return ResponseEntity.status(e.getErrorCode()).body("Oxr feign client error.");
+        }
 
         if (!todayRatesResp.getRates().containsKey(currencyCode)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No such currency code.");
         }
+
         var todayRate = todayRatesResp.getRates().get(currencyCode);
         var yesterdayRate = yesterdayRatesResp.getRates().get(currencyCode);
-
-        var gif = gifClient.getGif(giphyApiKey, todayRate > yesterdayRate ? "rich" : "broke");
+        Gif gif;
+        try {
+            gif = gifClient.getGif(giphyApiKey, todayRate > yesterdayRate ? "rich" : "broke");
+        } catch (ClientException e) {
+            return ResponseEntity.status(e.getErrorCode()).body("Gif client error.");
+        }
 
         var gifRate = new GifRate();
         gifRate.url = gif.getData().getImages().getImage().getUrl();

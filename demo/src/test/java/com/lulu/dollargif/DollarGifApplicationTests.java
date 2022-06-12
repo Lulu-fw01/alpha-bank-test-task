@@ -8,6 +8,7 @@ import com.lulu.dollargif.dto.gif.GifData;
 import com.lulu.dollargif.dto.gif.images.Images;
 import com.lulu.dollargif.dto.gif.images.image.Image;
 import com.lulu.dollargif.dto.rate.Rate;
+import com.lulu.dollargif.exception.ClientException;
 import com.lulu.dollargif.model.GifRate;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -68,7 +69,7 @@ class DollarGifApplicationTests {
     }
 
     @Test
-    void getGifTest() {
+    void getGifTest() throws ClientException {
         var yesterdayRate = new Rate();
         yesterdayRate.setBase("USD");
         var yMap = new HashMap<String, Double>();
