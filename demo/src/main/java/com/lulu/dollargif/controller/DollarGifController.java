@@ -42,25 +42,8 @@ public class DollarGifController {
         this.oxrClient = oxrClient;
     }
 
-    @GetMapping("/")
-    String hello() {
-        return "Hello world!";
-    }
-
-    @Deprecated
-    private static String getGifHtml(Double yesterdayRate, Double todayRate, String gifUrl) {
-        return String.format("""
-                <html>
-                <header><title>Gif</title></header>
-                <body>
-                <b>yesterday: %s</b><p>
-                <b>today: %s</b><p>
-                <img src="%s"  width="250" /></body>
-                </html>""", yesterdayRate, todayRate, gifUrl);
-    }
-
     @GetMapping("/gif/{currencyCode}")
-    ResponseEntity<?> getGif(@PathVariable("currencyCode") String currencyCode) {
+    public ResponseEntity<?> getGif(@PathVariable("currencyCode") String currencyCode) {
         var todayRatesResp = oxrClient.getLatest(oxrId);
 
         var date = getYesterdayDate();
