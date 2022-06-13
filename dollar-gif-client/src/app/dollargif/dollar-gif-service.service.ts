@@ -7,7 +7,7 @@ import {Observable} from 'rxjs';
 })
 export class DollarGifService {
 
-  private url = 'http://localhost:8080/currency-gif';
+  private url = 'http://localhost:5000/currency-gif';
 
   constructor(private http: HttpClient) {
   }
