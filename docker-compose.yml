@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  backendserver:
+    build: ./demo/
+    ports:
+      - "5000:5000"
+    restart: always
+  frontend:
+    build: ./dollar-gif-client/
+    links:
+      - "backendserver"
+    depends_on:
+      - "backendserver"
+    ports:
+      - "4200:4200"
