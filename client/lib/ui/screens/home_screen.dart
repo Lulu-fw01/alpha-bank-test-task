@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(
               height: 8,
             ),
-            ElevatedButton(onPressed: () {}, child: Text('Get gif')),
+            ElevatedButton(onPressed: () {}, child: const Text('Get gif')),
             const SizedBox(height: 8,),
             Image.network('https://res.cloudinary.com/practicaldev/image/fetch/s--s2WZChX_--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_66%2Cw_880/https://roszkowski.dev/images/2020-05-04/flutter_logo_leg.gif')
           ],
