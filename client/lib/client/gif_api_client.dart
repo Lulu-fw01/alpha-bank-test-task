@@ -9,7 +9,8 @@ class GifApi {
   final String baseUrl;
 
   Future<GifDto> getGif(String code) async {
-    final response = await http.get(Uri.parse(baseUrl + '/gif/$code'));
+    final uri = '$baseUrl/gif/$code';
+    final response = await http.get(Uri.parse(uri),);
 
     if (response.statusCode == 200) {
       return GifDto.fromJson(jsonDecode(response.body));

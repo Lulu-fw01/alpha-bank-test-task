@@ -15,7 +15,7 @@ class HomeScreen extends StatelessWidget {
     });
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.all(128),
+        padding: const EdgeInsets.all(128),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -30,8 +30,7 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(
               height: 8,
             ),
-            Image.network(
-                'https://res.cloudinary.com/practicaldev/image/fetch/s--s2WZChX_--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_66%2Cw_880/https://roszkowski.dev/images/2020-05-04/flutter_logo_leg.gif')
+            _content()
           ],
         ),
       ),
@@ -41,4 +40,22 @@ class HomeScreen extends StatelessWidget {
   static void _onGetGifClicked(BuildContext context, String code) {
     BlocProvider.of<HomeBloc>(context).add(GetGifButtonClickedEvent(code: code));
   }
+
+  /// Content of the screen. Depends on app state.
+  Widget _content() => BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
+    if (state is HomeInitial) {
+      return Container();
+    }
+    if (state is HomeLoading) {
+      return const CircularProgressIndicator();
+    }
+    if (state is HomeSuccess) {
+      return Expanded(child: Image.network(state.gif.uri, fit: BoxFit.contain,),);
+    }
+    if (state is HomeError) {
+      return const Text('error');
+    } 
+    return Container();
+  }
+  ,);
 }
