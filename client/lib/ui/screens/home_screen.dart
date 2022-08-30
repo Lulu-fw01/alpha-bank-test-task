@@ -1,4 +1,5 @@
 import 'package:client/ui/screens/bloc/home_bloc.dart';
+import 'package:client/ui/widgets/gif_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,18 +20,27 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextField(
-              controller: currencyBaseController,
-              textAlign: TextAlign.center,
+            Expanded(
+              flex: 1,
+              child: Column(
+                children: [
+                  TextField(
+                    maxLength: 3,
+                    controller: currencyBaseController,
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  ElevatedButton(
+                      onPressed: () {
+                        _onGetGifClicked(context, currencyCode);
+                      },
+                      child: const Text('Get gif')),
+                ],
+              ),
             ),
-            const SizedBox(
-              height: 8,
-            ),
-            ElevatedButton(onPressed: () {_onGetGifClicked(context, currencyCode);}, child: const Text('Get gif')),
-            const SizedBox(
-              height: 8,
-            ),
-            _content()
+            Expanded(flex: 1, child: _content())
           ],
         ),
       ),
@@ -38,24 +48,26 @@ class HomeScreen extends StatelessWidget {
   }
 
   static void _onGetGifClicked(BuildContext context, String code) {
-    BlocProvider.of<HomeBloc>(context).add(GetGifButtonClickedEvent(code: code));
+    BlocProvider.of<HomeBloc>(context)
+        .add(GetGifButtonClickedEvent(code: code));
   }
 
   /// Content of the screen. Depends on app state.
-  Widget _content() => BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
-    if (state is HomeInitial) {
-      return Container();
-    }
-    if (state is HomeLoading) {
-      return const CircularProgressIndicator();
-    }
-    if (state is HomeSuccess) {
-      return Expanded(child: Image.network(state.gif.uri, fit: BoxFit.contain,),);
-    }
-    if (state is HomeError) {
-      return const Text('error');
-    } 
-    return Container();
-  }
-  ,);
+  Widget _content() => BlocBuilder<HomeBloc, HomeState>(
+        builder: (context, state) {
+          if (state is HomeInitial) {
+            return Container();
+          }
+          if (state is HomeLoading) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (state is HomeSuccess) {
+            return GifWidget(uri: state.gif.uri);
+          }
+          if (state is HomeError) {
+            return const Center(child: Text('error'));
+          }
+          return Container();
+        },
+      );
 }
