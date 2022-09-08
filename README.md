@@ -9,14 +9,11 @@ cd <path-to-repository>/demo
 
 ### Run client
 ```bash
-cd <path-to-repository>/dollar-gif-client
-ng serve
+cd <path-to-repository>/client
+flutter run -d web-server --web-port 4200
 ```
 
-### Docker container
-
-[Docker hub repo](https://hub.docker.com/repository/docker/lulufw01/alpha-bank-test-task)
-
+### Docker compose
 Run docker compose
 
 ```bash
